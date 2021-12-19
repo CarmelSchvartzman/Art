@@ -1,2 +1,2 @@
-# Art
+# NaturalArt
 Natural Art Website
