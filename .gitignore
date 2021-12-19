@@ -1,0 +1,5 @@
+obj
+bin
+API/appsettings.json
+*.db
+

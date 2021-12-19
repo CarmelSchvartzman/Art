@@ -1,0 +1,66 @@
+PARA RUN ESTA APP:
+cd API[]
+EXTENSIONS
+C# for VS code
+C# Extensions (deprecated pero instalar igual)
+Material Icon Theme
+NuGet Package Manager
+NuGet Gallery
+SQLite
+
+NUGET  (CTRL+SHIFT+P)
+microsoft.entityframeworkcore.sqlite  //  despues de ver que version dotnet tengo : dotnet --info (mirar la variable "Host")
+                       // despues de la instalacion, hacer : dotnet restore
+Microsoft.EntityFrameworkCore.Design
+
+
+CERTIFICATE
+dotnet dev-certs https // certificate is present?
+dotnet dev-certs https -t    // -t Trust the certificate (hacer esto en ADMIN mode)
+
+DOTNET
+clear
+dotnet new sln
+dotnet new webapi -o API
+dotnet sln add API
+(en esta etapa: CTL+SHIFT+P : .NET Generate Assets for Build and Debug)
+dotnet run
+dotnet watch run
+dotnet --info    //  ver que version dotnet tengo : ver : Host (useful for support): Version: 5.0.12
+dotnet restore
+// Crear 2 DLLs con classes:
+dotnet new classlib -o Core
+dotnet new classlib -o Infrastructure
+dotnet sln add Core  //  agregar los 2 DLLs a la solution
+dotnet sln add Infrastructure
+dotnet add reference ../Infrastructure // agregar las dependencies al API project (hacer cd API antes)
+dotnet add reference ../Core // agregar las dependencies al Infrastructure project (hacer cd Infrastructure antes)
+dotnet restore // agregar las references a la solution (hacer cd .. antes)
+// Despues de crear los DLLs, mover las carpetas Entities a Core y Data a Infrastructure, simplemente drag-drop.
+// Y hay que mover los PACKAGE REFERENCES del .csproj de un proyecto al otro, y hacer restore en ART.
+
+MIGRATIONS   -  parar el dotnet run antes, pq migrations hacen BUILD:
+dotnet tool list -g   //  ver que hay ya instalado
+// instalacion del tool EF:  https://www.nuget.org/packages/dotnet-ef :
+dotnet tool install --global dotnet-ef --version 6.0.1  //  si ef cli no esta isntalado
+dotnet tool update --global dotnet-ef --version 6.0.1  //  si se desea upgrade el tool
+dotnet ef -h  //  ver los comandos que hay disponibles
+   //  agregar el package Microsoft.EntityFrameworkCore.Design
+dotnet ef migrations add InitialCreate -o Data/Migrations
+dotnet ef database -h   //  comandos
+dotnet ef database update   // updates the database : o sea , usa la ultima migrations
+
+SQLITE
+para ver la db, hacer CTL+SHIFT+P : SQLITE >  Open database
+para insertar records: right click sobre la table > NEW QUERY INSERT
+
+GIT
+git init    //  repositorio vacio : (hacer cd .. antes)  
+// crear .gitignore file : obj bin API/appsettings.json *.db
+git add .
+git commit -m "Initial Commit"
+git status
+
+
+
+
